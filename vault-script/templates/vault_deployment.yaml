@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vault-deployment
+  labels:
+    app: vault-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vault-deployment
+  template:
+    metadata:
+      labels:
+        app: vault-deployment
+    spec:
+      containers:
+      - name: vault
+        image: vault:latest
+        env:
+        - name: VAULT_DEV_ROOT_TOKEN_ID
+          value: nMP4wuKJP2kus0lChuDig86kdUw6pwNk
+        - name: VAULT_DEV_LISTEN_ADDRESS
+          value: 0.0.0.0:8200
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8200
